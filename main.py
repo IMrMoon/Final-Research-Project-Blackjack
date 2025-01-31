@@ -142,7 +142,7 @@ def blackjack(config, args, instance_dir):
                     action_list[i] = 1
                     continue
                 # for action  == 0 or None we need to take the action
-                if action is not 1:
+                if action != 1:
                     # print(type(players))
                     # print(N_s)
                     epsilon = n_zeros / float(n_zeros + N_s[(players[i], dealer)])
@@ -197,8 +197,8 @@ def blackjack(config, args, instance_dir):
             MC(reward_list, keys_by_players, N_s, N_sa, Q_sa)
         if update == 'QL':
             QL(reward_list, keys_by_players, N_s, N_sa, Q_sa)
-        if update == 'TD':
-            TD(reward_list, keys_by_players, N_s, N_sa, Q_sa)
+        # if update == 'TD':
+        #     TD(reward_list, keys_by_players, N_s, N_sa, Q_sa)
 
         # After sufficient training we start to count the wins for each players
         if k > int(epochs * 0.8):
@@ -276,7 +276,7 @@ def main():
     args = vars(parser.parse_args())
     m_list = args['m']
     n_list = args['n']
-    update_list = ['MC', 'QL', 'TD']
+    update_list = ['MC', 'QL']
     policy_list = ['best_policy', 'epsilon_greedy_policy']
     config_dir = os.path.join(HOME, 'config.json')
     for m in m_list:
